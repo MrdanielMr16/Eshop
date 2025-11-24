@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuInicio"
+        android:title="Inicio" />
+
+    <item
+        android:id="@+id/menuUsuarios"
+        android:title="Gestionar usuarios" />
+
+    <item
+        android:id="@+id/menuProductos"
+        android:title="Gestionar productos" />
+
+    <item
+        android:id="@+id/menuCerrarSesion"
+        android:title="Cerrar sesión" />
+
+</menu>
