@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.eshop.R
+import com.google.android.material.appbar.MaterialToolbar
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var btnCrudUsuarios: Button
@@ -19,10 +20,17 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
+
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbarHome)
+        setSupportActionBar(toolbar)
         btnCrudUsuarios = findViewById(R.id.btnCrudUsuarios)
         btnCrudProductos = findViewById(R.id.btnCrudProductos)
 
-
+        btnCrudUsuarios.setOnClickListener {
+            // Ir a la pantalla del CRUD de productos
+            val intent = Intent(this, AdminUsuariosActivity::class.java)
+            startActivity(intent)
+        }
 
         btnCrudProductos.setOnClickListener {
             // Ir a la pantalla del CRUD de productos
@@ -53,9 +61,9 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.menuUsuarios -> {
                 // TODO: crea esta activity para CRUD de usuarios
-                //val intent = Intent(this, AdminUsuariosActivity::class.java)
-                //startActivity(intent)
-                //return true
+                val intent = Intent(this, AdminUsuariosActivity::class.java)
+                startActivity(intent)
+                return true
             }
             R.id.menuProductos -> {
                 val intent = Intent(this, AdminProductosActivity::class.java)

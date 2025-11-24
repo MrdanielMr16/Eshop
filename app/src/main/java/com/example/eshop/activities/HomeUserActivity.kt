@@ -4,29 +4,49 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.eshop.R
+import com.example.eshop.database.ProductoDAO
+import com.example.eshop.models.Producto
+import com.google.android.material.appbar.MaterialToolbar
 
 class HomeUserActivity : AppCompatActivity() {
+
+    private lateinit var listViewProductosUser: ListView
+    private lateinit var productoDAO: ProductoDAO
+    private lateinit var productos: MutableList<Producto>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_home_user)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbarHome)
+        setSupportActionBar(toolbar)
+        listViewProductosUser = findViewById(R.id.listViewProductosUser)
+        productoDAO = ProductoDAO(this)
+
+        cargarProductos()
     }
+
+    private fun cargarProductos() {
+        productos = productoDAO.obtenerTodos().toMutableList()
+        val adapter = ProductoAdapter(this, productos)
+        listViewProductosUser.adapter = adapter
+
+        // Nada de clicks para editar/eliminar aquí
+        // Es solo lectura para el usuario normal
+    }
+
+    // ===== MENÚ =====
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_principal, menu)
 
-        // Ocultar opciones de admin
+        // Ocultamos opciones de admin
         val itemUsuarios = menu.findItem(R.id.menuUsuarios)
         val itemProductos = menu.findItem(R.id.menuProductos)
 
@@ -39,6 +59,7 @@ class HomeUserActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuInicio -> {
+                // Ya está en inicio (HomeUserActivity)
                 Toast.makeText(this, "Ya estás en Inicio", Toast.LENGTH_SHORT).show()
                 return true
             }
@@ -59,5 +80,4 @@ class HomeUserActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 }

@@ -97,6 +97,23 @@ class UsuarioDAO(context: Context) {
         return filas > 0
     }
 
+    fun actualizarRol(id: Int, nuevoRol: String): Boolean {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put(DatabaseHelper.COLUMN_Rol, nuevoRol)
+        }
+
+        val filas = db.update(
+            DatabaseHelper.TABLE_USUARIOS,
+            values,
+            "${DatabaseHelper.COLUMN_ID} = ?",
+            arrayOf(id.toString())
+        )
+
+        db.close()
+        return filas > 0
+    }
+
     /**
      * Actualizar solo el nombre del usuario
      */
@@ -115,6 +132,45 @@ class UsuarioDAO(context: Context) {
 
         db.close()
         return filas > 0
+    }
+
+    fun obtenerTodosLosUsuarios(): List<Usuarios> {
+        val db = dbHelper.readableDatabase
+        val lista = mutableListOf<Usuarios>()
+
+        val cursor = db.query(
+            DatabaseHelper.TABLE_USUARIOS,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_ID))
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_Nombre))
+                val email = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_Email))
+                val password = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_Password))
+                val rol = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_Rol))
+
+                lista.add(
+                    Usuarios(
+                        id = id,
+                        nombre = nombre,
+                        email = email,
+                        password = password,
+                        rol = rol
+                    )
+                )
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return lista
     }
 
 }
