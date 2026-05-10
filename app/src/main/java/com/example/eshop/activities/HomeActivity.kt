@@ -8,14 +8,16 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.eshop.R
 import com.google.android.material.appbar.MaterialToolbar
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var btnCrudUsuarios: Button
     private lateinit var btnCrudProductos: Button
+    private lateinit var btnReporteVentas: Button
+    private lateinit var btnVolverAdmin: Button
+    private lateinit var btnCerrarSesionAdmin: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,49 +27,62 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         btnCrudUsuarios = findViewById(R.id.btnCrudUsuarios)
         btnCrudProductos = findViewById(R.id.btnCrudProductos)
+        btnReporteVentas = findViewById(R.id.btnReporteVentas)
+        btnVolverAdmin = findViewById(R.id.btnVolverAdmin)
+        btnCerrarSesionAdmin = findViewById(R.id.btnCerrarSesionAdmin)
 
         btnCrudUsuarios.setOnClickListener {
-            // Ir a la pantalla del CRUD de productos
-            val intent = Intent(this, AdminUsuariosActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, AdminUsuariosActivity::class.java))
         }
 
         btnCrudProductos.setOnClickListener {
-            // Ir a la pantalla del CRUD de productos
-            val intent = Intent(this, AdminProductosActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, AdminProductosActivity::class.java))
+        }
+
+        btnReporteVentas.setOnClickListener {
+            StaticScreenActivity.open(this, StaticScreenActivity.ADMIN_REPORTES)
+        }
+
+        btnVolverAdmin.setOnClickListener {
+            finish()
+        }
+
+        btnCerrarSesionAdmin.setOnClickListener {
+            cerrarSesion()
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_principal, menu)
-
-        // Leer rol por si lo necesitas (en admin igual será "admin")
-        val prefs = getSharedPreferences("sesion", MODE_PRIVATE)
-        val rol = prefs.getString("rol", "usuario")
-
-        // Si quisieras ocultar algo dependiendo del rol, lo puedes hacer aquí
-        // val itemUsuarios = menu.findItem(R.id.menuUsuarios)
-        // itemUsuarios.isVisible = rol == "admin"
-
+        menu.findItem(R.id.menuCatalogo).isVisible = false
+        menu.findItem(R.id.menuCarrito).isVisible = false
+        menu.findItem(R.id.menuPagos).isVisible = false
+        menu.findItem(R.id.menuPerfilComprador).isVisible = false
+        menu.findItem(R.id.menuPedidosVendedor).isVisible = false
+        menu.findItem(R.id.menuPerfilVendedor).isVisible = false
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuInicio -> {
-                // Ya estás en HomeActivity, no hace falta hacer nada especial
-                Toast.makeText(this, "Ya estás en Inicio", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Ya estas en Inicio", Toast.LENGTH_SHORT).show()
                 return true
             }
             R.id.menuUsuarios -> {
-                // TODO: crea esta activity para CRUD de usuarios
-                val intent = Intent(this, AdminUsuariosActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, AdminUsuariosActivity::class.java))
                 return true
             }
             R.id.menuProductos -> {
-                val intent = Intent(this, AdminProductosActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, AdminProductosActivity::class.java))
+                return true
+            }
+            R.id.menuReportes -> {
+                StaticScreenActivity.open(this, StaticScreenActivity.ADMIN_REPORTES)
+                return true
+            }
+            R.id.menuBiometria -> {
+                StaticScreenActivity.open(this, StaticScreenActivity.BIOMETRIC_AUTH)
                 return true
             }
             R.id.menuCerrarSesion -> {
@@ -87,5 +102,4 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 }

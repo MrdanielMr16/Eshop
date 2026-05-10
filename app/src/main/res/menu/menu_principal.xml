@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menuInicio"
@@ -16,10 +14,39 @@
         android:title="Gestionar productos" />
 
     <item
+        android:id="@+id/menuReportes"
+        android:title="Reporte de ventas" />
+
+    <item
+        android:id="@+id/menuCatalogo"
+        android:title="Catalogo" />
+
+    <item
+        android:id="@+id/menuCarrito"
+        android:title="Carrito de compras" />
+
+    <item
+        android:id="@+id/menuPagos"
+        android:title="Pasarela de pagos" />
+
+    <item
+        android:id="@+id/menuPerfilComprador"
+        android:title="Perfil de usuario" />
+
+    <item
+        android:id="@+id/menuPedidosVendedor"
+        android:title="Pedidos recibidos" />
+
+    <item
+        android:id="@+id/menuPerfilVendedor"
+        android:title="Perfil de vendedor" />
+
+    <item
+        android:id="@+id/menuBiometria"
+        android:title="Autenticacion biometrica" />
+
+    <item
         android:id="@+id/menuCerrarSesion"
-        android:title="Cerrar sesión" />
-
-
-
+        android:title="Cerrar sesion" />
 
 </menu>

@@ -1,20 +1,18 @@
 package com.example.eshop.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import android.content.Intent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.edit
 import com.example.eshop.R
 import com.example.eshop.database.UsuarioDAO
 import com.example.eshop.models.Usuarios
-import androidx.core.content.edit
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var editTextEmail: EditText
@@ -28,24 +26,27 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        // Inicializamos el DAO
         usuarioDAO = UsuarioDAO(this)
         initViews()
         setupListeners()
-
     }
 
     private fun setupListeners() {
-        // Botón de volver
         txtVolver.setOnClickListener {
-            finish() // Regresa a la pantalla anterior
+            finish()
         }
 
-        // Botón de inicio de sesión
         btnLogin.setOnClickListener {
             iniciarSesion()
         }
 
+        findViewById<TextView?>(R.id.txtRecuperarPassword)?.setOnClickListener {
+            StaticScreenActivity.open(this, StaticScreenActivity.RECOVER_PASSWORD)
+        }
+
+        findViewById<Button?>(R.id.btnBiometria)?.setOnClickListener {
+            StaticScreenActivity.open(this, StaticScreenActivity.BIOMETRIC_AUTH)
+        }
     }
 
     private fun initViews() {
@@ -59,41 +60,41 @@ class LoginActivity : AppCompatActivity() {
         val email = editTextEmail.text.toString().trim()
         val password = editTextPassword.text.toString().trim()
 
-        // Validaciones básicas
         if (email.isBlank() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.error = "Correo electrónico inválido"
+            editTextEmail.error = "Correo electronico invalido"
             return
         }
 
         if (password.isBlank()) {
-            editTextPassword.error = "La contraseña no puede estar vacía"
+            editTextPassword.error = "La contrasena no puede estar vacia"
             return
         }
 
-        // Validar credenciales con el DAO
         val esValido = usuarioDAO.validarLogin(email, password)
         val usuario = usuarioDAO.obtenerUsuario(email)
         if (esValido && usuario != null) {
-            Toast.makeText(this, "Inicio de sesión exitoso, Bienvenido ${usuario.nombre}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Inicio de sesion exitoso, Bienvenido ${usuario.nombre}", Toast.LENGTH_LONG).show()
             guardarSesion(usuario)
 
-            // Redirección según el rol
-            if (usuario.rol == "admin") {
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.putExtra("NOMBRE_USUARIO", usuario.nombre)
-                startActivity(intent)
-            } else {
-                val intent = Intent(this, HomeUserActivity::class.java)
-                intent.putExtra("NOMBRE_USUARIO", usuario.nombre)
-                startActivity(intent)
+            when (usuario.rol) {
+                "admin" -> {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.putExtra("NOMBRE_USUARIO", usuario.nombre)
+                    startActivity(intent)
+                }
+                "vendedor" -> {
+                    StaticScreenActivity.open(this, StaticScreenActivity.SELLER_DASHBOARD)
+                }
+                else -> {
+                    val intent = Intent(this, HomeUserActivity::class.java)
+                    intent.putExtra("NOMBRE_USUARIO", usuario.nombre)
+                    startActivity(intent)
+                }
             }
-
-            // Opcional: cerrar Login para que no pueda volver con atrás
             finish()
         } else {
-            Toast.makeText(this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Correo o contrasena incorrectos", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     private fun guardarSesion(usuario: Usuarios) {
@@ -102,9 +103,6 @@ class LoginActivity : AppCompatActivity() {
             putString("email", usuario.email)
             putString("nombre", usuario.nombre)
             putString("rol", usuario.rol)
-            // apply() lo hace internamente
         }
     }
 }
-
-

@@ -12,10 +12,7 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.eshop.R
 import com.example.eshop.adapters.UsuarioAdapter
 import com.example.eshop.database.UsuarioDAO
@@ -29,7 +26,6 @@ class AdminUsuariosActivity : AppCompatActivity() {
     private lateinit var usuarioDAO: UsuarioDAO
     private lateinit var usuarios: MutableList<Usuarios>
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_usuarios)
@@ -41,25 +37,20 @@ class AdminUsuariosActivity : AppCompatActivity() {
         btnAgregarUsuario = findViewById(R.id.btnAgregarUsuarios)
 
         btnAgregarUsuario.setOnClickListener {
-            // Usamos tu RegisterActivity para crear un nuevo usuario
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        // Click corto: editar usuario
         listViewUsuarios.setOnItemClickListener { _, _, position, _ ->
-            val usuario = usuarios[position]
-            mostrarDialogoEditarUsuario(usuario)
+            mostrarDialogoEditarUsuario(usuarios[position])
         }
 
-        // Click largo: eliminar usuario
         listViewUsuarios.setOnItemLongClickListener { _, _, position, _ ->
             val usuario = usuarios[position]
             AlertDialog.Builder(this)
                 .setTitle("Eliminar usuario")
-                .setMessage("¿Seguro que deseas eliminar a ${usuario.nombre}?")
-                .setPositiveButton("Sí") { _, _ ->
-                    if (usuario.id != null && usuarioDAO.eliminarUsuario(usuario.id)) {
+                .setMessage("Seguro que deseas eliminar a ${usuario.nombre}?")
+                .setPositiveButton("Si") { _, _ ->
+                    if (usuarioDAO.eliminarUsuario(usuario.id)) {
                         Toast.makeText(this, "Usuario eliminado", Toast.LENGTH_SHORT).show()
                         cargarUsuarios()
                     } else {
@@ -74,7 +65,6 @@ class AdminUsuariosActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Para recargar la lista cuando regreses de RegisterActivity
         cargarUsuarios()
     }
 
@@ -89,11 +79,9 @@ class AdminUsuariosActivity : AppCompatActivity() {
         val editNombre = view.findViewById<EditText>(R.id.editNombreUsuarioDialog)
         val spinnerRol = view.findViewById<Spinner>(R.id.spinnerRolUsuarioDialog)
 
-        // Rellenar campos
         editNombre.setText(usuario.nombre)
 
-        // Configurar spinner de roles
-        val roles = listOf("admin", "usuario")
+        val roles = listOf("admin", "vendedor", "usuario")
         val adapterSpinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, roles)
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerRol.adapter = adapterSpinner
@@ -109,16 +97,12 @@ class AdminUsuariosActivity : AppCompatActivity() {
                 val nuevoRol = spinnerRol.selectedItem.toString()
 
                 if (nuevoNombre.isBlank()) {
-                    Toast.makeText(this, "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "El nombre no puede estar vacio", Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
 
-                var ok = true
-
-                if (usuario.id != null) {
-                    ok = usuarioDAO.actualizarNombre(usuario.id, nuevoNombre) &&
-                            usuarioDAO.actualizarRol(usuario.id, nuevoRol)
-                }
+                val ok = usuarioDAO.actualizarNombre(usuario.id, nuevoNombre) &&
+                        usuarioDAO.actualizarRol(usuario.id, nuevoRol)
 
                 if (ok) {
                     Toast.makeText(this, "Usuario actualizado", Toast.LENGTH_SHORT).show()
@@ -130,36 +114,38 @@ class AdminUsuariosActivity : AppCompatActivity() {
             .setNegativeButton("Cancelar", null)
             .show()
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_principal, menu)
-
-        // Leer rol por si lo necesitas (en admin igual será "admin")
-        val prefs = getSharedPreferences("sesion", MODE_PRIVATE)
-        val rol = prefs.getString("rol", "usuario")
-
-        // Si quisieras ocultar algo dependiendo del rol, lo puedes hacer aquí
-        // val itemUsuarios = menu.findItem(R.id.menuUsuarios)
-        // itemUsuarios.isVisible = rol == "admin"
-
+        menu.findItem(R.id.menuCatalogo).isVisible = false
+        menu.findItem(R.id.menuCarrito).isVisible = false
+        menu.findItem(R.id.menuPagos).isVisible = false
+        menu.findItem(R.id.menuPerfilComprador).isVisible = false
+        menu.findItem(R.id.menuPedidosVendedor).isVisible = false
+        menu.findItem(R.id.menuPerfilVendedor).isVisible = false
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuInicio -> {
-                // Ya estás en HomeActivity, no hace falta hacer nada especial
-                Toast.makeText(this, "Ya estás en Inicio", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, HomeActivity::class.java))
                 return true
             }
             R.id.menuUsuarios -> {
-                // TODO: crea esta activity para CRUD de usuarios
-                val intent = Intent(this, AdminUsuariosActivity::class.java)
-                startActivity(intent)
+                Toast.makeText(this, "Ya estas en Gestion de usuarios", Toast.LENGTH_SHORT).show()
                 return true
             }
             R.id.menuProductos -> {
-                val intent = Intent(this, AdminProductosActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, AdminProductosActivity::class.java))
+                return true
+            }
+            R.id.menuReportes -> {
+                StaticScreenActivity.open(this, StaticScreenActivity.ADMIN_REPORTES)
+                return true
+            }
+            R.id.menuBiometria -> {
+                StaticScreenActivity.open(this, StaticScreenActivity.BIOMETRIC_AUTH)
                 return true
             }
             R.id.menuCerrarSesion -> {

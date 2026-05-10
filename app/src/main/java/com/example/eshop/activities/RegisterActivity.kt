@@ -1,9 +1,9 @@
 package com.example.eshop.activities
 
 import android.os.Bundle
-import android.widget.TextView
-import android.widget.EditText
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,16 +19,14 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var editTextConfirmarContrasena: EditText
     private lateinit var btnRegistrar: Button
     private lateinit var txtVolver: TextView
-    private val usuarioDAO = UsuarioDAO(this)
-
-
+    private lateinit var usuarioDAO: UsuarioDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
-        var usuarioDAO = UsuarioDAO(this)
+        usuarioDAO = UsuarioDAO(this)
         initViews()
         setupListeners()
     }
@@ -38,7 +36,7 @@ class RegisterActivity : AppCompatActivity() {
             registrarUsuario()
         }
         txtVolver.setOnClickListener {
-            finish() // Vuelve al login o pantalla anterior
+            finish()
         }
     }
 
@@ -57,53 +55,50 @@ class RegisterActivity : AppCompatActivity() {
         val password = editTextContrasena.text.toString().trim()
         val confirmar = editTextConfirmarContrasena.text.toString().trim()
 
-        // Si se registra con este correo, será admin
-        val rol = if (email == "admin@eshop.com") {
-            "admin"
-        } else {
-            "usuario"
+        val rol = when (email) {
+            "admin@eshop.com" -> "admin"
+            "vendedor@eshop.com" -> "vendedor"
+            else -> "usuario"
         }
 
-        // Validaciones simples
         if (nombre.isBlank()) {
-            editTextNombre.error = "El nombre no puede estar vacío"
+            editTextNombre.error = "El nombre no puede estar vacio"
             return
         }
 
         if (email.isBlank() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextCorreo.error = "Correo electrónico inválido"
+            editTextCorreo.error = "Correo electronico invalido"
             return
         }
 
         if (password.length < 6) {
-            editTextContrasena.error = "La contraseña debe tener al menos 6 caracteres"
+            editTextContrasena.error = "La contrasena debe tener al menos 6 caracteres"
             return
         }
 
         if (password != confirmar) {
-            editTextConfirmarContrasena.error = "Las contraseñas no coinciden"
+            editTextConfirmarContrasena.error = "Las contrasenas no coinciden"
             return
         }
 
-        // Verificar si el usuario ya existe
         val usuarioExistente = usuarioDAO.obtenerUsuario(email)
         if (usuarioExistente != null) {
-            Toast.makeText(this, "El correo ya está registrado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "El correo ya esta registrado", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Crear y registrar usuario
-        var nuevoUsuario = Usuarios(nombre = nombre, email = email, password = password, rol = rol)
-        var exito = usuarioDAO.registrarUsuario(nuevoUsuario)
+        val nuevoUsuario = Usuarios(nombre = nombre, email = email, password = password, rol = rol)
+        val exito = usuarioDAO.registrarUsuario(nuevoUsuario)
 
         if (exito) {
-            Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Usuario registrado correctamente como $rol", Toast.LENGTH_LONG).show()
             limpiarCampos()
             finish()
         } else {
             Toast.makeText(this, "Error al registrar el usuario", Toast.LENGTH_LONG).show()
         }
     }
+
     private fun limpiarCampos() {
         editTextNombre.text.clear()
         editTextCorreo.text.clear()
@@ -111,5 +106,3 @@ class RegisterActivity : AppCompatActivity() {
         editTextConfirmarContrasena.text.clear()
     }
 }
-
-
