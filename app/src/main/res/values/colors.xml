@@ -3,4 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#93AD3D</color>
+    <color name="tech_navy">#263853</color>
+    <color name="tech_navy_dark">#14201E</color>
+    <color name="tech_blue">#14B8D4</color>
+    <color name="tech_light">#F4F4F4</color>
+    <color name="tech_muted">#9E9E9E</color>
+    <color name="tech_text">#202428</color>
 </resources>

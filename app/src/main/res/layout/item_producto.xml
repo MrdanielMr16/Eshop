@@ -1,37 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:padding="12dp">
 
     <TextView
-        android:id="@+id/tvNombreProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del producto"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:background="@drawable/tech_search_box"
+        android:gravity="center"
+        android:text="RTX"
+        android:textColor="@color/tech_navy"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvPrecioProducto"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Precio: $0.0"
-        android:textSize="14sp" />
+        android:layout_marginStart="14dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvStockProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stock: 0"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvNombreProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del producto"
+            android:textColor="@color/tech_text"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvDescripcionProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descripción del producto"
-        android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tvPrecioProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Precio: $0.0"
+            android:textColor="@color/tech_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvStockProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stock: 0"
+            android:textColor="@color/tech_muted"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvDescripcionProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción del producto"
+            android:textColor="@color/tech_muted"
+            android:textSize="12sp" />
+    </LinearLayout>
 </LinearLayout>
