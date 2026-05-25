@@ -1,32 +1,110 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
 
-    <EditText
-        android:id="@+id/editNombreProducto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <EditText
-        android:id="@+id/editDescripcionProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Descripción" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Datos del producto"
+            android:textColor="@color/tech_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editPrecioProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Precio"
-        android:inputType="numberDecimal" />
+        <EditText
+            android:id="@+id/editNombreProducto"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/tech_input"
+            android:hint="Nombre del producto"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/tech_text"
+            android:textColorHint="@color/tech_muted" />
 
-    <EditText
-        android:id="@+id/editStockProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Stock"
-        android:inputType="number" />
-</LinearLayout>
+        <EditText
+            android:id="@+id/editDescripcionProducto"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/tech_input"
+            android:gravity="top"
+            android:hint="Descripción"
+            android:padding="16dp"
+            android:textColor="@color/tech_text"
+            android:textColorHint="@color/tech_muted" />
+
+        <EditText
+            android:id="@+id/editPrecioProducto"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/tech_input"
+            android:hint="Precio"
+            android:inputType="numberDecimal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/tech_text"
+            android:textColorHint="@color/tech_muted" />
+
+        <EditText
+            android:id="@+id/editStockProducto"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/tech_input"
+            android:hint="Stock"
+            android:inputType="number"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/tech_text"
+            android:textColorHint="@color/tech_muted" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Imagen del producto"
+            android:textColor="@color/tech_text"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSeleccionarGaleria"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/tech_search_box"
+                android:text="Galería"
+                android:textAllCaps="false"
+                android:textColor="@color/tech_navy"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnTomarFoto"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/tech_search_box"
+                android:text="Cámara"
+                android:textAllCaps="false"
+                android:textColor="@color/tech_navy"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

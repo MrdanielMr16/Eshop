@@ -138,6 +138,17 @@
             android:textAllCaps="false"
             android:textColor="@color/tech_navy"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnGoogleLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tech_search_box"
+            android:text="Ingresar con Google"
+            android:textAllCaps="false"
+            android:textColor="@color/tech_navy"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
