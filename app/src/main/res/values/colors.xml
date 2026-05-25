@@ -3,10 +3,23 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#93AD3D</color>
+    <color name="tech_black">#0A0A0A</color>
     <color name="tech_navy">#263853</color>
+    <color name="tech_navy_panel">#243552</color>
     <color name="tech_navy_dark">#14201E</color>
     <color name="tech_blue">#14B8D4</color>
     <color name="tech_light">#F4F4F4</color>
+    <color name="tech_input_gray">#E4E4E4</color>
+    <color name="tech_search_gray">#F0F0F0</color>
+    <color name="tech_bottom_gray">#999999</color>
+    <color name="tech_card_gray">#ECECEC</color>
+    <color name="tech_pattern_blue">#4A638F</color>
+    <color name="tech_pattern_dark">#16231F</color>
+    <color name="tech_divider">#EEEEEE</color>
+    <color name="tech_dashboard_text">#174D5F</color>
+    <color name="launcher_green">#3DDC84</color>
+    <color name="transparent">#00000000</color>
+    <color name="launcher_grid">#33FFFFFF</color>
     <color name="tech_muted">#9E9E9E</color>
     <color name="tech_text">#202428</color>
 </resources>

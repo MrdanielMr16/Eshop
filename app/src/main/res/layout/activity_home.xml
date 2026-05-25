@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
@@ -14,7 +14,7 @@
         android:background="@drawable/tech_top_bar"
         app:navigationIcon="@android:drawable/ic_media_previous"
         app:navigationIconTint="@android:color/white"
-        app:title="Panel de admin"
+        app:title="@string/admin_panel"
         app:titleCentered="true"
         app:titleTextColor="@android:color/white" />
 
@@ -43,16 +43,16 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Usuarios"
-                        android:textColor="#174D5F"
+                        android:text="@string/users"
+                        android:textColor="@color/tech_dashboard_text"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="123"
-                        android:textColor="#174D5F"
+                        android:text="@string/users_count_sample"
+                        android:textColor="@color/tech_dashboard_text"
                         android:textSize="31sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -68,8 +68,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="Ventas Anuales"
-                        android:textColor="#174D5F"
+                        android:text="@string/annual_sales"
+                        android:textColor="@color/tech_dashboard_text"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -77,8 +77,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="24.673.232"
-                        android:textColor="#174D5F"
+                        android:text="@string/annual_sales_sample"
+                        android:textColor="@color/tech_dashboard_text"
                         android:textSize="29sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Ventas Mensuales"
+                android:text="@string/monthly_sales"
                 android:textColor="@color/tech_text"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -108,8 +108,8 @@
                     android:background="@color/tech_blue"
                     android:gravity="bottom|center_horizontal"
                     android:paddingBottom="6dp"
-                    android:text="Enero"
-                    android:textColor="#174D5F" />
+                    android:text="@string/month_january"
+                    android:textColor="@color/tech_dashboard_text" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -119,8 +119,8 @@
                     android:background="@color/tech_blue"
                     android:gravity="bottom|center_horizontal"
                     android:paddingBottom="6dp"
-                    android:text="Febrero"
-                    android:textColor="#174D5F" />
+                    android:text="@string/month_february"
+                    android:textColor="@color/tech_dashboard_text" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -129,8 +129,8 @@
                     android:background="@color/tech_blue"
                     android:gravity="bottom|center_horizontal"
                     android:paddingBottom="6dp"
-                    android:text="Marzo"
-                    android:textColor="#174D5F" />
+                    android:text="@string/month_march"
+                    android:textColor="@color/tech_dashboard_text" />
             </LinearLayout>
 
             <LinearLayout
@@ -144,7 +144,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Actividad Reciente"
+                    android:text="@string/recent_activity"
                     android:textColor="@color/tech_text"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -153,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="●  Nuevo usuario registrado      5 min"
+                    android:text="@string/recent_user_registered"
                     android:textColor="@color/tech_text"
                     android:textSize="16sp" />
 
@@ -161,7 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="●  Nueva venta completada        1 hr"
+                    android:text="@string/recent_sale_completed"
                     android:textColor="@color/tech_text"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -172,7 +172,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="22dp"
                 android:background="@drawable/tech_button_primary"
-                android:text="Gestionar Usuarios"
+                android:text="@string/manage_users"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -183,7 +183,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/tech_button_primary"
-                android:text="Gestión de Productos"
+                android:text="@string/manage_products"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -194,7 +194,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/tech_button_primary"
-                android:text="Reporte de Ventas"
+                android:text="@string/sales_report"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -205,7 +205,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/tech_search_box"
-                android:text="Volver"
+                android:text="@string/back"
                 android:textAllCaps="false"
                 android:textColor="@color/tech_navy"
                 android:textStyle="bold" />
@@ -216,7 +216,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/tech_button_primary"
-                android:text="Cerrar Sesión"
+                android:text="@string/logout"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />

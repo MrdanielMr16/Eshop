@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#16231F">
+    android:background="@color/tech_pattern_dark">
 
     <View
         android:layout_width="76dp"
@@ -122,14 +122,14 @@
                 android:id="@+id/lgo"
                 android:layout_width="58dp"
                 android:layout_height="58dp"
-                android:contentDescription="Logo TechStore"
+                android:contentDescription="@string/logo_techstore"
                 android:src="@drawable/logo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="TechStore"
+                android:text="@string/techstore"
                 android:textColor="@color/tech_text"
                 android:textSize="27sp"
                 android:textStyle="bold" />
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="Tecnología que\nimpulsa tu mundo"
+            android:text="@string/splash_tagline"
             android:textColor="@android:color/white"
             android:textSize="25sp"
             android:textStyle="bold" />

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginTop="24dp"
-        android:text="←"
+        android:text="@string/back_arrow"
         android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="bold" />
@@ -29,13 +29,13 @@
         <ImageView
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:contentDescription="Logo TechStore"
+            android:contentDescription="@string/logo_techstore"
             android:src="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TechStore"
+            android:text="@string/techstore"
             android:textColor="@color/tech_text"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Iniciar\nSesión"
+            android:text="@string/login"
             android:textColor="@color/tech_text"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:letterSpacing="0.16"
-            android:text="CORREO ELECTRONICO"
+            android:text="@string/email_label"
             android:textColor="@color/tech_muted"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -77,7 +77,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/tech_input"
-            android:hint="correo@techstore.com"
+            android:hint="@string/sample_email"
             android:inputType="textEmailAddress"
             android:paddingStart="18dp"
             android:paddingEnd="18dp"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:letterSpacing="0.16"
-            android:text="CONTRASEÑA"
+            android:text="@string/password_label"
             android:textColor="@color/tech_muted"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -100,7 +100,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/tech_input"
-            android:hint="******"
+            android:hint="@string/sample_password"
             android:inputType="textPassword"
             android:paddingStart="18dp"
             android:paddingEnd="18dp"
@@ -113,7 +113,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/tech_button_primary"
-            android:text="Iniciar Sesión"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="Olvidaste contraseña?"
+            android:text="@string/forgot_password"
             android:textColor="@color/tech_muted"
             android:textSize="13sp" />
 
@@ -134,7 +134,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/tech_search_box"
-            android:text="Ingresar con biometria"
+            android:text="@string/login_biometric"
             android:textAllCaps="false"
             android:textColor="@color/tech_navy"
             android:textStyle="bold" />
@@ -145,7 +145,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/tech_search_box"
-            android:text="Ingresar con Google"
+            android:text="@string/login_google"
             android:textAllCaps="false"
             android:textColor="@color/tech_navy"
             android:textStyle="bold" />

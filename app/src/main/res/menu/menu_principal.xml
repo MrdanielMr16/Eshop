@@ -1,52 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menuInicio"
-        android:title="Inicio" />
+        android:title="@string/menu_home" />
 
     <item
         android:id="@+id/menuUsuarios"
-        android:title="Gestionar usuarios" />
+        android:title="@string/menu_manage_users" />
 
     <item
         android:id="@+id/menuProductos"
-        android:title="Gestionar productos" />
+        android:title="@string/menu_manage_products" />
 
     <item
         android:id="@+id/menuReportes"
-        android:title="Reporte de ventas" />
+        android:title="@string/menu_sales_report" />
 
     <item
         android:id="@+id/menuCatalogo"
-        android:title="Catalogo" />
+        android:title="@string/menu_catalog" />
 
     <item
         android:id="@+id/menuCarrito"
-        android:title="Carrito de compras" />
+        android:title="@string/menu_cart" />
 
     <item
         android:id="@+id/menuPagos"
-        android:title="Pasarela de pagos" />
+        android:title="@string/menu_payments" />
 
     <item
         android:id="@+id/menuPerfilComprador"
-        android:title="Perfil de usuario" />
+        android:title="@string/menu_buyer_profile" />
 
     <item
         android:id="@+id/menuPedidosVendedor"
-        android:title="Pedidos recibidos" />
+        android:title="@string/menu_seller_orders" />
 
     <item
         android:id="@+id/menuPerfilVendedor"
-        android:title="Perfil de vendedor" />
+        android:title="@string/menu_seller_profile" />
 
     <item
         android:id="@+id/menuBiometria"
-        android:title="Autenticacion biometrica" />
+        android:title="@string/menu_biometric_auth" />
 
     <item
         android:id="@+id/menuCerrarSesion"
-        android:title="Cerrar sesion" />
+        android:title="@string/menu_logout" />
 
 </menu>

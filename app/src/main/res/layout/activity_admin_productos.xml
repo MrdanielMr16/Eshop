@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
@@ -14,7 +14,7 @@
         android:background="@drawable/tech_top_bar"
         app:navigationIcon="@android:drawable/ic_media_previous"
         app:navigationIconTint="@android:color/white"
-        app:title="Gestión de productos"
+        app:title="@string/manage_products"
         app:titleCentered="true"
         app:titleTextColor="@android:color/white" />
 
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Productos registrados"
+            android:text="@string/products_registered"
             android:textColor="@color/tech_text"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Crea, edita, elimina y administra inventario con imágenes."
+            android:text="@string/products_admin_subtitle"
             android:textColor="@color/tech_muted"
             android:textSize="14sp" />
 
@@ -47,7 +47,7 @@
             android:layout_marginTop="18dp"
             android:layout_weight="1"
             android:background="@drawable/tech_card"
-            android:divider="#EEEEEE"
+            android:divider="@color/tech_divider"
             android:dividerHeight="1dp"
             android:padding="8dp" />
 
@@ -57,7 +57,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/tech_button_primary"
-            android:text="Agregar producto"
+            android:text="@string/add_product"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold" />

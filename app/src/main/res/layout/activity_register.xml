@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginTop="24dp"
-        android:text="←"
+        android:text="@string/back_arrow"
         android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="bold" />
@@ -29,13 +29,13 @@
         <ImageView
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:contentDescription="Logo TechStore"
+            android:contentDescription="@string/logo_techstore"
             android:src="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TechStore"
+            android:text="@string/techstore"
             android:textColor="@color/tech_text"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -55,7 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear cuenta"
+            android:text="@string/create_account"
             android:textColor="@color/tech_text"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:letterSpacing="0.16"
-            android:text="NOMBRE COMPLETO"
+            android:text="@string/full_name_label"
             android:textColor="@color/tech_muted"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -76,7 +76,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/tech_input"
-            android:hint="Pepito Perez"
+            android:hint="@string/sample_name"
             android:paddingStart="18dp"
             android:paddingEnd="18dp" />
 
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:letterSpacing="0.16"
-            android:text="CORREO ELECTRONICO"
+            android:text="@string/email_label"
             android:textColor="@color/tech_muted"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -96,7 +96,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/tech_input"
-            android:hint="correo@techstore.com"
+            android:hint="@string/sample_email"
             android:inputType="textEmailAddress"
             android:paddingStart="18dp"
             android:paddingEnd="18dp" />
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:letterSpacing="0.16"
-            android:text="CONTRASEÑA"
+            android:text="@string/password_label"
             android:textColor="@color/tech_muted"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -117,7 +117,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/tech_input"
-            android:hint="******"
+            android:hint="@string/sample_password"
             android:inputType="textPassword"
             android:paddingStart="18dp"
             android:paddingEnd="18dp" />
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:letterSpacing="0.16"
-            android:text="CONFIRMAR CONTRASEÑA"
+            android:text="@string/confirm_password_label"
             android:textColor="@color/tech_muted"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -138,7 +138,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/tech_input"
-            android:hint="******"
+            android:hint="@string/sample_password"
             android:inputType="textPassword"
             android:paddingStart="18dp"
             android:paddingEnd="18dp" />
@@ -149,7 +149,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/tech_button_primary"
-            android:text="Crear cuenta"
+            android:text="@string/create_account"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
