@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         findViewById<TextView?>(R.id.txtRecuperarPassword)?.setOnClickListener {
-            StaticScreenActivity.open(this, StaticScreenActivity.RECOVER_PASSWORD)
+            RecoverPasswordActivity.open(this)
         }
 
         findViewById<Button?>(R.id.btnBiometria)?.setOnClickListener {

@@ -15,6 +15,12 @@
     <string name="password_label">CONTRASENA</string>
     <string name="confirm_password_label">CONFIRMAR CONTRASENA</string>
     <string name="forgot_password">Olvidaste contrasena?</string>
+    <string name="recover_password_title">Recuperar contrasena</string>
+    <string name="recover_password_subtitle">Ingresa tu correo, valida el codigo y crea una nueva contrasena.</string>
+    <string name="verification_code_label">CODIGO DE VERIFICACION</string>
+    <string name="new_password_label">NUEVA CONTRASENA</string>
+    <string name="send_code">Enviar codigo</string>
+    <string name="update_password">Actualizar contrasena</string>
     <string name="login_biometric">Ingresar con biometria</string>
     <string name="login_google">Ingresar con Google</string>
     <string name="sample_email">correo@techstore.com</string>

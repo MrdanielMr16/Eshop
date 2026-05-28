@@ -92,6 +92,21 @@ class SupabaseUsuarioRepository {
         }
     }
 
+    fun actualizarPassword(email: String, nuevaPassword: String, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
+        runSupabase(onError) {
+            table.update(
+                {
+                    set("password", PasswordHelper.hashPassword(nuevaPassword))
+                }
+            ) {
+                filter {
+                    filter("email", FilterOperator.EQ, email.trim().lowercase())
+                }
+            }
+            onSuccess()
+        }
+    }
+
     fun eliminar(rowId: Int, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
         runSupabase(onError) {
             table.delete {
