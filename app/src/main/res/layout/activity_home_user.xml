@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/tech_light"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -21,21 +21,22 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="28dp">
+            android:padding="18dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="146dp"
+                android:layout_height="156dp"
                 android:background="@drawable/tech_top_bar"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -43,13 +44,22 @@
                     android:gravity="center"
                     android:text="@string/home_banner_title"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="@string/buyer_home_subtitle"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
                 <Button
-                    android:layout_width="142dp"
+                    android:layout_width="150dp"
                     android:layout_height="44dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tech_button_accent"
                     android:text="@string/view_detail"
                     android:textAllCaps="false"
@@ -58,98 +68,138 @@
             </LinearLayout>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tech_search_box"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:text="@string/search_products"
+                android:textColor="@color/tech_muted"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/txtBienvenidaComprador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/categories"
                 android:textColor="@color/tech_text"
-                android:textSize="18sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="12dp"
                 android:columnCount="3"
                 android:rowCount="2">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="82dp"
+                    android:layout_height="86dp"
                     android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/tech_card_metric"
                     android:gravity="center"
                     android:text="@string/category_processors"
                     android:textColor="@color/tech_navy"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="82dp"
+                    android:layout_height="86dp"
                     android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/tech_card_metric"
                     android:gravity="center"
                     android:text="@string/category_graphics"
                     android:textColor="@color/tech_navy"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="82dp"
+                    android:layout_height="86dp"
                     android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/tech_card_metric"
                     android:gravity="center"
                     android:text="@string/category_memory"
                     android:textColor="@color/tech_navy"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="82dp"
+                    android:layout_height="86dp"
                     android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/tech_card_metric"
                     android:gravity="center"
                     android:text="@string/category_storage"
                     android:textColor="@color/tech_navy"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="82dp"
+                    android:layout_height="86dp"
                     android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/tech_card_metric"
                     android:gravity="center"
                     android:text="@string/category_peripherals"
                     android:textColor="@color/tech_navy"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="82dp"
+                    android:layout_height="86dp"
                     android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/tech_card_metric"
                     android:gravity="center"
                     android:text="@string/category_accessories"
                     android:textColor="@color/tech_navy"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
             </GridLayout>
-
-            <TextView
-                android:id="@+id/txtProductosDisponibles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="@string/available_products"
-                android:textColor="@color/tech_text"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ListView
-                android:id="@+id/listViewProductosUser"
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:layout_marginTop="8dp"
-                android:divider="@color/tech_divider"
-                android:dividerHeight="1dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/tech_card_metric"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/txtProductosDisponibles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/featured_products"
+                    android:textColor="@color/tech_text"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ListView
+                    android:id="@+id/listViewProductosUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="330dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:divider="@color/tech_divider"
+                    android:dividerHeight="1dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -161,7 +211,8 @@
                     android:background="@drawable/tech_button_primary"
                     android:text="@string/cart"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnPerfilUsuario"
@@ -172,7 +223,8 @@
                     android:background="@drawable/tech_button_primary"
                     android:text="@string/profile"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <Button
@@ -191,6 +243,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/tech_button_primary"
                 android:text="@string/logout"
                 android:textAllCaps="false"

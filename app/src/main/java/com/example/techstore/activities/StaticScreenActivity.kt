@@ -124,11 +124,100 @@ class StaticScreenActivity : AppCompatActivity() {
     }
 
     private fun addSellerDashboard(content: LinearLayout) {
-        content.setBackgroundColor(Color.rgb(205, 205, 205))
-        content.addView(card("Vendido", listOf("$1.220.000", "⌄"), gray = true))
-        content.addView(chartCard("Ventas de la Semana", listOf("Lunes", "Martes", "Miercoles", "Jueves", "Viernes")))
-        content.addView(card("Pedidos Recientes", listOf("Pedido a125                       PENDIENTE", "Pedido a126                       ENVIADO"), gray = true))
-        content.addView(primaryButton("Ver todos los productos", SELLER_PRODUCTS))
+        content.setBackgroundColor(light)
+        content.addView(line("Resumen de tu tienda", 23f, text, true))
+        content.addView(line("Controla ventas, pedidos e inventario desde un solo lugar.", 14f, muted, false))
+        content.addView(sellerMetricStrip())
+        content.addView(sellerChartCard())
+        content.addView(sellerOrdersCard())
+        content.addView(primaryButton("Gestionar productos", SELLER_PRODUCTS))
+        content.addView(primaryButton("Pedidos recibidos", SELLER_ORDERS))
+    }
+
+    private fun sellerMetricStrip(): LinearLayout {
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            addView(sellerMiniMetric("Vendido", "$1.220.000", accent), LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                setMargins(0, dp(14), dp(6), dp(14))
+            })
+            addView(sellerMiniMetric("Pedidos", "12", navy), LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                setMargins(dp(6), dp(14), 0, dp(14))
+            })
+        }
+    }
+
+    private fun sellerMiniMetric(title: String, value: String, markerColor: Int): LinearLayout {
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            background = rounded(Color.WHITE, 12f)
+            setPadding(dp(16), dp(14), dp(16), dp(14))
+            addView(TextView(this@StaticScreenActivity).apply {
+                text = " "
+                background = rounded(markerColor, 20f)
+            }, LinearLayout.LayoutParams(dp(30), dp(30)))
+            addView(line(title, 14f, muted, false))
+            addView(line(value, 22f, text, true))
+        }
+    }
+
+    private fun sellerChartCard(): LinearLayout {
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            background = rounded(Color.WHITE, 12f)
+            setPadding(dp(18), dp(16), dp(18), dp(16))
+            addView(line("Ventas de la semana", 21f, text, true))
+            addView(line("Tendencia positiva frente al inicio de semana", 13f, muted, false))
+            addView(LinearLayout(this@StaticScreenActivity).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.BOTTOM
+                listOf(42, 62, 54, 82, 116).forEachIndexed { index, height ->
+                    addView(TextView(this@StaticScreenActivity).apply {
+                        text = listOf("L", "M", "M", "J", "V")[index]
+                        gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+                        setTextColor(Color.WHITE)
+                        textSize = 12f
+                        background = rounded(if (index == 4) accent else navy, 8f)
+                    }, LinearLayout.LayoutParams(0, dp(height), 1f).apply {
+                        setMargins(dp(4), dp(18), dp(4), 0)
+                    })
+                }
+            }, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(138)))
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+                setMargins(0, 0, 0, dp(16))
+            }
+        }
+    }
+
+    private fun sellerOrdersCard(): LinearLayout {
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            background = rounded(Color.WHITE, 12f)
+            setPadding(dp(18), dp(16), dp(18), dp(16))
+            addView(line("Pedidos recientes", 21f, text, true))
+            addView(sellerOrderRow("Pedido a125", "Pendiente", Color.rgb(197, 145, 30)))
+            addView(sellerOrderRow("Pedido a126", "Enviado", Color.rgb(46, 157, 105)))
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+                setMargins(0, 0, 0, dp(16))
+            }
+        }
+    }
+
+    private fun sellerOrderRow(order: String, status: String, statusColor: Int): LinearLayout {
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(0, dp(10), 0, dp(4))
+            addView(line(order, 15f, text, false), LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+            addView(TextView(this@StaticScreenActivity).apply {
+                text = status
+                textSize = 12f
+                typeface = Typeface.DEFAULT_BOLD
+                setTextColor(statusColor)
+                gravity = Gravity.CENTER
+                background = rounded(Color.rgb(244, 244, 244), 18f)
+                setPadding(dp(12), dp(6), dp(12), dp(6))
+            })
+        }
     }
 
     private fun addCreateProductContent(content: LinearLayout) {
@@ -274,6 +363,9 @@ class StaticScreenActivity : AppCompatActivity() {
         setOnClickListener {
             when (target) {
                 PRODUCT_CRUD -> startActivity(Intent(this@StaticScreenActivity, AdminProductosActivity::class.java))
+                SELLER_PRODUCTS -> startActivity(Intent(this@StaticScreenActivity, AdminProductosActivity::class.java))
+                BUYER_CART -> CartActivity.open(this@StaticScreenActivity)
+                BUYER_PAYMENT -> PaymentActivity.open(this@StaticScreenActivity)
                 LOGOUT -> cerrarSesion()
                 null -> Toast.makeText(this@StaticScreenActivity, "$label listo", Toast.LENGTH_SHORT).show()
                 else -> open(this@StaticScreenActivity, target)

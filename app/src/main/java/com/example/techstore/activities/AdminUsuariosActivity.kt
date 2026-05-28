@@ -51,26 +51,7 @@ class AdminUsuariosActivity : AppCompatActivity() {
         }
 
         listViewUsuarios.setOnItemLongClickListener { _, _, position, _ ->
-            val usuario = usuarios[position]
-            AlertDialog.Builder(this)
-                .setTitle("Eliminar usuario")
-                .setMessage("Seguro que deseas eliminar a ${usuario.nombre}?")
-                .setPositiveButton("Si") { _, _ ->
-                    val rowId = usuarioRows[usuario.id]
-                    if (SupabaseClientProvider.isConfigured && rowId != null) {
-                        supabaseUsuarioRepository.eliminar(rowId, {
-                            Toast.makeText(this, "Usuario eliminado en Supabase", Toast.LENGTH_SHORT).show()
-                            cargarUsuarios()
-                        }, { error -> mostrarError(error) })
-                    } else if (usuarioDAO.eliminarUsuario(usuario.id)) {
-                        Toast.makeText(this, "Usuario eliminado localmente", Toast.LENGTH_SHORT).show()
-                        cargarUsuarios()
-                    } else {
-                        Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                .setNegativeButton("No", null)
-                .show()
+            confirmarEliminarUsuario(usuarios[position])
             true
         }
     }
@@ -148,6 +129,7 @@ class AdminUsuariosActivity : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.dialog_editar_usuario, null)
         val editNombre = view.findViewById<EditText>(R.id.editNombreUsuarioDialog)
         val spinnerRol = view.findViewById<Spinner>(R.id.spinnerRolUsuarioDialog)
+        val btnEliminar = view.findViewById<Button>(R.id.btnEliminarUsuarioDialog)
 
         editNombre.setText(usuario.nombre)
 
@@ -159,7 +141,7 @@ class AdminUsuariosActivity : AppCompatActivity() {
         val indexRol = roles.indexOf(usuario.rol)
         if (indexRol >= 0) spinnerRol.setSelection(indexRol)
 
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Editar usuario")
             .setView(view)
             .setPositiveButton("Guardar cambios") { _: DialogInterface, _: Int ->
@@ -187,7 +169,43 @@ class AdminUsuariosActivity : AppCompatActivity() {
                 }
             }
             .setNegativeButton("Cancelar", null)
+            .create()
+
+        btnEliminar.setOnClickListener {
+            confirmarEliminarUsuario(usuario) {
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun confirmarEliminarUsuario(usuario: Usuarios, onDeleted: (() -> Unit)? = null) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.delete_user))
+            .setMessage(getString(R.string.delete_user_confirm))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                eliminarUsuario(usuario, onDeleted)
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
+    }
+
+    private fun eliminarUsuario(usuario: Usuarios, onDeleted: (() -> Unit)? = null) {
+        val rowId = usuarioRows[usuario.id]
+        if (SupabaseClientProvider.isConfigured && rowId != null) {
+            supabaseUsuarioRepository.eliminar(rowId, {
+                Toast.makeText(this, "Usuario eliminado en Supabase", Toast.LENGTH_SHORT).show()
+                cargarUsuarios()
+                onDeleted?.invoke()
+            }, { error -> mostrarError(error) })
+        } else if (usuarioDAO.eliminarUsuario(usuario.id)) {
+            Toast.makeText(this, "Usuario eliminado localmente", Toast.LENGTH_SHORT).show()
+            cargarUsuarios()
+            onDeleted?.invoke()
+        } else {
+            Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

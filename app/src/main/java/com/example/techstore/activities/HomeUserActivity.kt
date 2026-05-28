@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.techstore.R
 import com.example.techstore.database.ProductoDAO
 import com.example.techstore.models.Producto
+import com.example.techstore.network.SupabaseClientProvider
+import com.example.techstore.network.SupabaseProductoCrudRepository
 import com.google.android.material.appbar.MaterialToolbar
 
 class HomeUserActivity : AppCompatActivity() {
@@ -21,6 +23,7 @@ class HomeUserActivity : AppCompatActivity() {
     private lateinit var btnVolverComprador: Button
     private lateinit var btnCerrarSesionComprador: Button
     private lateinit var productoDAO: ProductoDAO
+    private lateinit var supabaseProductoRepository: SupabaseProductoCrudRepository
     private lateinit var productos: MutableList<Producto>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +40,10 @@ class HomeUserActivity : AppCompatActivity() {
         btnVolverComprador = findViewById(R.id.btnVolverComprador)
         btnCerrarSesionComprador = findViewById(R.id.btnCerrarSesionComprador)
         productoDAO = ProductoDAO(this)
+        supabaseProductoRepository = SupabaseProductoCrudRepository(this)
 
         btnCarritoComprador.setOnClickListener {
-            StaticScreenActivity.open(this, StaticScreenActivity.BUYER_CART)
+            CartActivity.open(this)
         }
 
         btnPerfilUsuario.setOnClickListener {
@@ -79,11 +83,24 @@ class HomeUserActivity : AppCompatActivity() {
     }
 
     private fun cargarProductos() {
-        productos = productoDAO.obtenerTodos().toMutableList()
-        val adapter = ProductoAdapter(this, productos)
-        listViewProductosUser.adapter = adapter
-        listViewProductosUser.setOnItemClickListener { _, _, _, _ ->
-            StaticScreenActivity.open(this, StaticScreenActivity.BUYER_DETAIL)
+        if (SupabaseClientProvider.isConfigured) {
+            supabaseProductoRepository.obtenerTodos({ registros ->
+                productos = registros.map { it.producto }.toMutableList()
+                mostrarProductos()
+            }, {
+                productos = productoDAO.obtenerTodos().toMutableList()
+                mostrarProductos()
+            })
+        } else {
+            productos = productoDAO.obtenerTodos().toMutableList()
+            mostrarProductos()
+        }
+    }
+
+    private fun mostrarProductos() {
+        listViewProductosUser.adapter = ProductoAdapter(this, productos)
+        listViewProductosUser.setOnItemClickListener { _, _, position, _ ->
+            ProductDetailActivity.open(this, productos[position])
         }
     }
 
@@ -104,11 +121,11 @@ class HomeUserActivity : AppCompatActivity() {
                 return true
             }
             R.id.menuCarrito -> {
-                StaticScreenActivity.open(this, StaticScreenActivity.BUYER_CART)
+                CartActivity.open(this)
                 return true
             }
             R.id.menuPagos -> {
-                StaticScreenActivity.open(this, StaticScreenActivity.BUYER_PAYMENT)
+                PaymentActivity.open(this)
                 return true
             }
             R.id.menuPerfilComprador -> {

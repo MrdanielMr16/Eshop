@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/imgCarritoProducto"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:background="@drawable/tech_search_box"
+        android:contentDescription="@string/image_product"
+        android:padding="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNombreCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/product_default_name"
+            android:textColor="@color/tech_text"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPrecioCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/product_default_price"
+            android:textColor="@color/tech_dashboard_text"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnEliminarCarrito"
+            android:layout_width="110dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/tech_button_danger"
+            android:text="@string/remove_product"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

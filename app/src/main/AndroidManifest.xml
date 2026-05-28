@@ -23,6 +23,15 @@
             android:name=".activities.StaticScreenActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.ProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AdminUsuariosActivity"
             android:exported="false" />
         <activity

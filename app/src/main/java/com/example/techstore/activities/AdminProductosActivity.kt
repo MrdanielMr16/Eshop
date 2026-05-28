@@ -48,6 +48,8 @@ class AdminProductosActivity : AppCompatActivity() {
         setContentView(R.layout.activity_admin_productos)
 
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbarHome)
+        toolbar.title = if (esVendedor()) getString(R.string.seller_products) else getString(R.string.manage_products)
+        toolbar.setNavigationOnClickListener { finish() }
         setSupportActionBar(toolbar)
         productoDAO = ProductoDAO(this)
         supabaseProductoRepository = SupabaseProductoCrudRepository(this)
@@ -63,26 +65,7 @@ class AdminProductosActivity : AppCompatActivity() {
         }
 
         listViewProductos.setOnItemLongClickListener { _, _, position, _ ->
-            val producto = productos[position]
-            AlertDialog.Builder(this)
-                .setTitle("Eliminar producto")
-                .setMessage("Seguro que deseas eliminar ${producto.nombre}?")
-                .setPositiveButton("Si") { _, _ ->
-                    val rowId = producto.id?.let { productoRows[it] }
-                    if (SupabaseClientProvider.isConfigured && rowId != null) {
-                        supabaseProductoRepository.eliminar(rowId, {
-                            Toast.makeText(this, "Producto eliminado en Supabase", Toast.LENGTH_SHORT).show()
-                            cargarProductos()
-                        }, { error -> mostrarError(error) })
-                    } else if (producto.id != null && productoDAO.eliminarProducto(producto.id)) {
-                        Toast.makeText(this, "Producto eliminado localmente", Toast.LENGTH_SHORT).show()
-                        cargarProductos()
-                    } else {
-                        Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                .setNegativeButton("No", null)
-                .show()
+            confirmarEliminarProducto(productos[position])
             true
         }
 
@@ -97,13 +80,21 @@ class AdminProductosActivity : AppCompatActivity() {
                     record.producto.id?.let { productoRows[it] = record.rowId }
                     record.producto
                 }.toMutableList()
-                listViewProductos.adapter = ProductoAdapter(this, productos)
+                listViewProductos.adapter = crearAdapterProductos()
             }, { error -> mostrarError(error) })
         } else {
             productos = productoDAO.obtenerTodos().toMutableList()
-            val adapter = ProductoAdapter(this, productos)
-            listViewProductos.adapter = adapter
+            listViewProductos.adapter = crearAdapterProductos()
         }
+    }
+
+    private fun crearAdapterProductos(): ProductoAdapter {
+        return ProductoAdapter(
+            this,
+            productos,
+            onEdit = { producto -> mostrarDialogoEditarProducto(producto) },
+            onDelete = { producto -> confirmarEliminarProducto(producto) }
+        )
     }
 
     private fun mostrarDialogoCrearProducto() {
@@ -202,21 +193,58 @@ class AdminProductosActivity : AppCompatActivity() {
             .show()
     }
 
+    private fun confirmarEliminarProducto(producto: Producto) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.delete_product))
+            .setMessage(getString(R.string.delete_product_confirm))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                eliminarProducto(producto)
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
+
+    private fun eliminarProducto(producto: Producto) {
+        val rowId = producto.id?.let { productoRows[it] }
+        if (SupabaseClientProvider.isConfigured && rowId != null) {
+            supabaseProductoRepository.eliminar(rowId, {
+                Toast.makeText(this, "Producto eliminado en Supabase", Toast.LENGTH_SHORT).show()
+                cargarProductos()
+            }, { error -> mostrarError(error) })
+        } else if (producto.id != null && productoDAO.eliminarProducto(producto.id)) {
+            Toast.makeText(this, "Producto eliminado localmente", Toast.LENGTH_SHORT).show()
+            cargarProductos()
+        } else {
+            Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_principal, menu)
         menu.findItem(R.id.menuCatalogo).isVisible = false
         menu.findItem(R.id.menuCarrito).isVisible = false
         menu.findItem(R.id.menuPagos).isVisible = false
         menu.findItem(R.id.menuPerfilComprador).isVisible = false
-        menu.findItem(R.id.menuPedidosVendedor).isVisible = false
-        menu.findItem(R.id.menuPerfilVendedor).isVisible = false
+        if (esVendedor()) {
+            menu.findItem(R.id.menuUsuarios).isVisible = false
+            menu.findItem(R.id.menuReportes).isVisible = false
+            menu.findItem(R.id.menuPedidosVendedor).isVisible = true
+            menu.findItem(R.id.menuPerfilVendedor).isVisible = true
+        } else {
+            menu.findItem(R.id.menuPedidosVendedor).isVisible = false
+            menu.findItem(R.id.menuPerfilVendedor).isVisible = false
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuInicio -> {
-                startActivity(Intent(this, HomeActivity::class.java))
+                if (esVendedor()) {
+                    StaticScreenActivity.open(this, StaticScreenActivity.SELLER_DASHBOARD)
+                } else {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
                 return true
             }
             R.id.menuUsuarios -> {
@@ -239,8 +267,20 @@ class AdminProductosActivity : AppCompatActivity() {
                 cerrarSesion()
                 return true
             }
+            R.id.menuPedidosVendedor -> {
+                StaticScreenActivity.open(this, StaticScreenActivity.SELLER_ORDERS)
+                return true
+            }
+            R.id.menuPerfilVendedor -> {
+                StaticScreenActivity.open(this, StaticScreenActivity.SELLER_PROFILE)
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun esVendedor(): Boolean {
+        return getSharedPreferences("sesion", MODE_PRIVATE).getString("rol", "") == "vendedor"
     }
 
     private fun cerrarSesion() {

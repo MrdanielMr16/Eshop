@@ -17,6 +17,9 @@
     <color name="tech_pattern_dark">#16231F</color>
     <color name="tech_divider">#EEEEEE</color>
     <color name="tech_dashboard_text">#174D5F</color>
+    <color name="tech_danger">#D94343</color>
+    <color name="tech_success">#2E9D69</color>
+    <color name="tech_warning">#F4B942</color>
     <color name="launcher_green">#3DDC84</color>
     <color name="transparent">#00000000</color>
     <color name="launcher_grid">#33FFFFFF</color>

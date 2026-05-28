@@ -1,20 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="18dp">
 
     <EditText
         android:id="@+id/editNombreUsuarioDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name" />
+        android:background="@drawable/tech_input"
+        android:hint="@string/name"
+        android:padding="14dp" />
 
     <Spinner
         android:id="@+id/spinnerRolUsuarioDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="12dp"
+        android:background="@drawable/tech_input"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btnEliminarUsuarioDialog"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/tech_button_danger"
+        android:text="@string/delete_user"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
 </LinearLayout>
